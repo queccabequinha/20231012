@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Encriptação e Decriptação Binária</title>
+</head>
+<body>
+  <h1>Encriptação e Decriptação Binária</h1>
+  <form>
+    <label for="mensagemAberta">Mensagem Aberta:</label>
+    <input type="text" id="mensagemAberta">
+    <br>
+    <label for="mensagemCriptografada">Mensagem Criptografada:</label>
+    <input type="text" id="mensagemCriptografada">
+    <br>
+    <button type="button" id="criptografar">Criptografar</button>
+    <button type="button" id="descriptografar">Descriptografar</button>
+  </form>
+
+  <script>
+    const mensagemAbertaInput = document.getElementById("mensagemAberta");
+    const mensagemCriptografadaInput = document.getElementById("mensagemCriptografada");
+    const criptografarButton = document.getElementById("criptografar");
+    const descriptografarButton = document.getElementById("descriptografar");
+
+    function criptografarMensagem() {
+      const mensagemAberta = mensagemAbertaInput.value;
+      let mensagemCriptografada = "";
+
+      for (let i = 0; i < mensagemAberta.length; i++) {
+        const char = mensagemAberta[i];
+        const binaryChar = char.charCodeAt(0).toString(2);
+        mensagemCriptografada += binaryChar + " ";
+      }
+
+      mensagemCriptografadaInput.value = mensagemCriptografada;
+    }
+
+    function descriptografarMensagem() {
+      const mensagemCriptografada = mensagemCriptografadaInput.value;
+      const binarios = mensagemCriptografada.trim().split(" ");
+      let mensagemAberta = "";
+
+      for (let i = 0; i < binarios.length; i++) {
+        const binaryChar = binarios[i];
+        const char = String.fromCharCode(parseInt(binaryChar, 2));
+        mensagemAberta += char;
+      }
+
+      mensagemAbertaInput.value = mensagemAberta;
+    }
+
+    criptografarButton.addEventListener("click", criptografarMensagem);
+    descriptografarButton.addEventListener("click", descriptografarMensagem);
+  </script>
+</body>
+</html>
